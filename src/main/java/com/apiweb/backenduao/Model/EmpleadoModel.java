@@ -16,8 +16,17 @@ public class EmpleadoModel {
     private Integer idEmpleado;
     private String nombre;
     private String apellidos;
+
     @Column(name = "genero")
     @Enumerated(EnumType.STRING)
     private Genero genero;
     private Integer edad;
+
+    @ManyToOne
+    @JoinColumn(name = "idLugar")
+    private LugarModel lugar;
+
+    @ManyToOne
+    @JoinColumn(name = "idSede")
+    private SedeModel sede;
 }
