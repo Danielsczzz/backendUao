@@ -1,5 +1,6 @@
 package com.apiweb.backenduao.Service;
 
+import com.apiweb.backenduao.Exception.RecursoNoEncontradoExcep;
 import com.apiweb.backenduao.Model.EmpleadoModel;
 import com.apiweb.backenduao.Model.SedeModel;
 import com.apiweb.backenduao.Repository.IEmpleadoRepository;
@@ -26,6 +27,12 @@ public class EmpleadoServiceImp implements  IEmpleadoService {
     @Override
     public List<EmpleadoModel> obtenerEmpleados() {
         return empleadoRepository.findAll();
+    }
+
+    @Override
+    public EmpleadoModel obtenerEmpleadoPorId(int id) {
+        Optional<EmpleadoModel> empleadoRecuperado = empleadoRepository.findById(id);
+        return empleadoRecuperado.orElseThrow(()-> new RecursoNoEncontradoExcep("No existe un empleado con este id"));
     }
 
     @Override
