@@ -15,11 +15,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/apiweb/v1/formacion")
 public class FormacionController {
-    @Autowired
-    IFormacionService formacionService;
-    @Autowired
-    IEmpleadoService empleadoService;
+    // Fields injections
+    @Autowired IFormacionService formacionService;
+    @Autowired IEmpleadoService empleadoService;
 
+    // Endpoint to show all the degrees
+    @GetMapping("/")
+    public ResponseEntity<List<FormacionModel>> listarFormaciones() {
+        return new ResponseEntity<List<FormacionModel>>(formacionService.listarFormaciones(), HttpStatus.OK);
+    }
+
+    // Endpoint to show degrees by employee
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarFormacionesPorEmpleado(@PathVariable int id) {
+        try {
+            return new ResponseEntity<>(formacionService.listarFormacionesPorEmpleado(id), HttpStatus.OK);
+        } catch (RecursoNoEncontradoExcep e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    // Endpoint to create a new degree record in the db
+    // receives a degreeModel and validate if the employee exists.
     @PostMapping("/insertar")
     public ResponseEntity<String> crearFormacion(@RequestBody FormacionModel formacion) {
         try {
@@ -34,8 +51,4 @@ public class FormacionController {
         }
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<FormacionModel>> listarFormacion() {
-        return new ResponseEntity<List<FormacionModel>>(formacionService.listarFormaciones(), HttpStatus.OK);
-    }
 }

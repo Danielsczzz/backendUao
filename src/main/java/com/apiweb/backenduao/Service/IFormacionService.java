@@ -7,4 +7,5 @@ import java.util.List;
 public interface IFormacionService {
     String guardarFormacion(FormacionModel formacion);
     List<FormacionModel> listarFormaciones();
+    List<FormacionModel> listarFormacionesPorEmpleado(int id);
 }
