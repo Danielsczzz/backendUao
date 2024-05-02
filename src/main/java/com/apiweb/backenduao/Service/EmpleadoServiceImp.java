@@ -30,13 +30,6 @@ public class EmpleadoServiceImp implements  IEmpleadoService {
         return empleadoRecuperado.orElseThrow(()-> new RecursoNoEncontradoExcep("No existe un empleado con este id"));
     }
 
-    // Get employees by office
-    @Override
-    public List<EmpleadoModel> obtenerEmpleadosSede(int idSede) {
-        Optional<SedeModel> sede = sedeRepository.findById(idSede);
-        return empleadoRepository.findBySede(sede);
-    }
-
     // Create an employee and add to db
     @Override
     public String guardarEmpleado(EmpleadoModel empleado) {

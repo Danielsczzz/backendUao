@@ -22,17 +22,6 @@ public class EmpleadoController {
         return new ResponseEntity<>(empleadoService.obtenerEmpleados(), HttpStatus.OK);
     }
 
-    // Endpoint to show employees by office
-    @GetMapping("/sede/{id}")
-    public ResponseEntity<?> mostrarEmpleadosSede(@PathVariable int id) {
-        try {
-            List<EmpleadoModel> empleados = empleadoService.obtenerEmpleadosSede(id);
-            return ResponseEntity.ok(empleados);
-        } catch (RecursoNoEncontradoExcep e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
     // Endpoint to add a record of employee in the db
     @PostMapping("/insertar")
     public ResponseEntity<String> crearEmpleado(@RequestBody EmpleadoModel empleado){

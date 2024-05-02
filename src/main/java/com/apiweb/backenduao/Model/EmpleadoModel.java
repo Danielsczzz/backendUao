@@ -22,11 +22,4 @@ public class EmpleadoModel {
     private Genero genero;
     private Integer edad;
 
-    @ManyToOne
-    @JoinColumn(name = "idLugar")
-    private LugarModel lugar;
-
-    @ManyToOne
-    @JoinColumn(name = "idSede")
-    private SedeModel sede;
 }

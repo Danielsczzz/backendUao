@@ -8,5 +8,4 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IEmpleadoRepository  extends JpaRepository<EmpleadoModel, Integer> {
-    List<EmpleadoModel> findBySede(Optional<SedeModel> sede);
 }
