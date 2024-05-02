@@ -17,11 +17,6 @@ public class LugarModel {
     @Id
     private Integer idLugar;
     private String nombre;
-    @OneToMany(mappedBy = "lugar")
-    private Set<SedeModel> sedes = new HashSet<>();
-
-    @OneToMany(mappedBy = "lugar")
-    private Set<LugarModel> lugares = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "sublugar")
