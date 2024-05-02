@@ -13,18 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/apiweb/v1/empleados")
 public class EmpleadoController {
-    @Autowired
-    IEmpleadoService empleadoService;
-    @PostMapping("/insertar")
-    public ResponseEntity<String> crearEmpleado(@RequestBody EmpleadoModel empleado){
-        return new ResponseEntity<>(empleadoService.guardarEmpleado(empleado), HttpStatus.OK);
-    }
+    // Field injection
+    @Autowired IEmpleadoService empleadoService;
 
+    // Endpoint to show all the employees
     @GetMapping("/")
     public ResponseEntity<List<EmpleadoModel>> mostrarEmpleados() {
         return new ResponseEntity<>(empleadoService.obtenerEmpleados(), HttpStatus.OK);
     }
 
+    // Endpoint to show employees by office
     @GetMapping("/sede/{id}")
     public ResponseEntity<?> mostrarEmpleadosSede(@PathVariable int id) {
         try {
@@ -33,7 +31,12 @@ public class EmpleadoController {
         } catch (RecursoNoEncontradoExcep e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
 
+    // Endpoint to add a record of employee in the db
+    @PostMapping("/insertar")
+    public ResponseEntity<String> crearEmpleado(@RequestBody EmpleadoModel empleado){
+        return new ResponseEntity<>(empleadoService.guardarEmpleado(empleado), HttpStatus.OK);
     }
 
 }

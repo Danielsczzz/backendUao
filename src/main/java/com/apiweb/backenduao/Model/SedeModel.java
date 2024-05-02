@@ -14,6 +14,7 @@ public class SedeModel {
     @Id
     private int idSede;
     private String nombre;
+
     @ManyToOne
     @JoinColumn(name = "idLugar")
     private LugarModel lugar;

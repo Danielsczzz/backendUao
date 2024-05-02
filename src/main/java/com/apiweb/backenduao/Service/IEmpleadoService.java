@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface IEmpleadoService {
     String guardarEmpleado(EmpleadoModel empleado);
     List<EmpleadoModel> obtenerEmpleados();
+    EmpleadoModel obtenerEmpleadoPorId(int id);
     List<EmpleadoModel> obtenerEmpleadosSede(int idSede);
 }
